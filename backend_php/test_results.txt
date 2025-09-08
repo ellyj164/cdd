@@ -1,0 +1,24 @@
+PHP Warning:  Zend OPcache can't be temporary enabled (it may be only disabled till the end of request) in /home/runner/work/cdd/cdd/backend_php/config/config.php on line 65
+PHP Stack trace:
+PHP   1. {main}() /home/runner/work/cdd/cdd/backend_php/test.php:0
+PHP   2. require_once() /home/runner/work/cdd/cdd/backend_php/test.php:8
+PHP   3. ini_set($option = 'opcache.enable', $value = 1) /home/runner/work/cdd/cdd/backend_php/config/config.php:65
+=== PHP Backend Test Suite ===
+
+1. Testing Configuration...
+   ✓ Configuration loaded successfully
+
+2. Testing JWT Functions...
+   ✓ JWT generation and verification working
+
+3. Testing Password Functions...
+   ✓ Password hashing and verification working
+
+4. Testing Validation Functions...
+   ✓ Email and password validation working
+
+5. Testing Rate Limiter...
+   ✓ Rate limiter working
+
+6. Testing Response Helper...
+{"success":true,"message":"Test message","timestamp":"2025-09-08T05:27:13+00:00","data":{"test":"data"}}

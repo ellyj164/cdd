@@ -2,11 +2,15 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
     
+    # Handle backend API requests - route to PHP backend
+    RewriteCond %{REQUEST_URI} ^/backend_php/
+    RewriteRule ^backend_php/(.*)$ backend_php/index.php [L,QSA]
+    
     # Handle Angular and React Router
     # If the request is for a file that doesn't exist, serve index.html
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_URI} !^/backend/
+    RewriteCond %{REQUEST_URI} !^/backend_php/
     RewriteRule . /index.html [L]
     
     # Security headers
@@ -26,6 +30,7 @@
         AddOutputFilterByType DEFLATE application/rss+xml
         AddOutputFilterByType DEFLATE application/javascript
         AddOutputFilterByType DEFLATE application/x-javascript
+        AddOutputFilterByType DEFLATE application/json
     </IfModule>
     
     # Cache static assets
@@ -38,5 +43,6 @@
         ExpiresByType image/jpeg "access plus 1 year"
         ExpiresByType image/gif "access plus 1 year"
         ExpiresByType image/svg+xml "access plus 1 year"
+        ExpiresByType application/json "access plus 0 seconds"
     </IfModule>
 </IfModule>
