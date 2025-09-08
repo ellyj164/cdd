@@ -1,4 +1,4 @@
-# High-Performance PHP Ecommerce Backend
+# Fezamarket - High-Performance PHP Backend
 
 A complete, high-performance PHP backend for ecommerce applications with comprehensive API endpoints, authentication, and database management.
 

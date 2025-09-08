@@ -17,7 +17,7 @@ define('JWT_EXPIRY', 86400); // 24 hours
 define('JWT_REFRESH_EXPIRY', 604800); // 7 days
 
 // Application configuration
-define('APP_NAME', 'High-Performance PHP Ecommerce Backend');
+define('APP_NAME', 'Fezamarket - High-Performance PHP Backend');
 define('APP_VERSION', '1.0.0');
 define('APP_URL', 'https://yourdomain.com');
 define('API_BASE_URL', '/backend_php');
@@ -39,7 +39,7 @@ define('SMTP_PORT', 587);
 define('SMTP_USERNAME', 'your-email@domain.com');
 define('SMTP_PASSWORD', 'your-smtp-password');
 define('SMTP_FROM_EMAIL', 'noreply@yourdomain.com');
-define('SMTP_FROM_NAME', 'Ecommerce Platform');
+define('SMTP_FROM_NAME', 'Fezamarket');
 
 // Security configuration
 define('BCRYPT_COST', 12);

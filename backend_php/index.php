@@ -1,6 +1,6 @@
 <?php
 /**
- * High-Performance PHP Backend for Ecommerce Platform
+ * Fezamarket - High-Performance PHP Backend
  * Entry point for all API requests
  * 
  * This file handles routing, middleware, and API request processing
@@ -102,7 +102,7 @@ try {
     // API info
     $router->get('/api', function() {
         ResponseHelper::sendSuccess([
-            'name' => 'High-Performance PHP Ecommerce Backend',
+            'name' => 'Fezamarket - High-Performance PHP Backend',
             'version' => '1.0.0',
             'status' => 'operational',
             'features' => [

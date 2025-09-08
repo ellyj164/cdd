@@ -1,4 +1,4 @@
-# High-Performance PHP Backend for Ecommerce Platform
+# Fezamarket - High-Performance PHP Backend
 
 ## Overview
 

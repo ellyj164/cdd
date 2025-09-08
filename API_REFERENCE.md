@@ -1,4 +1,4 @@
-# Global Nexus Professional Ecommerce Platform API Reference
+# Fezamarket API Reference
 
 ## Enterprise API Documentation v1.0.0
 
@@ -25,7 +25,7 @@ Returns comprehensive platform status and capabilities.
 **Response:**
 ```json
 {
-  "name": "Global Nexus Professional Ecommerce Platform API",
+  "name": "Fezamarket API",
   "version": "1.0.0",
   "status": "operational",
   "features": {
@@ -120,7 +120,7 @@ GET /api/v1/marketplace/products?category=technology&limit=10&sort=rating&busine
           "blockchain": {
             "verified": true,
             "hash": "0x1a2b3c4d5e6f7890abcdef",
-            "network": "Global Nexus Chain",
+            "network": "Fezamarket Chain",
             "certifications": ["Authenticity Verified", "Supply Chain Tracked"]
           }
         },
@@ -315,7 +315,7 @@ Verify product authenticity using blockchain verification.
   "productId": "prod-123",
   "verified": true,
   "blockchain": {
-    "network": "Global Nexus Chain",
+    "network": "Fezamarket Chain",
     "hash": "0x1a2b3c4d5e6f7890abcdef",
     "blockNumber": 15234567,
     "confirmations": 2047
@@ -588,7 +588,7 @@ Configure webhooks in your dashboard or via API:
 
 ---
 
-**Global Nexus Professional Ecommerce Platform API v1.0.0**
+**Fezamarket API v1.0.0**
 *Built for the future of enterprise commerce*
 
 For support: api-support@globalnexus.com
