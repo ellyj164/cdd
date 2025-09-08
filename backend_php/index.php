@@ -206,6 +206,11 @@ try {
     // Banner routes
     $router->get('/api/banners', [BannerController::class, 'getAll']);
     $router->get('/api/banners/hero', [BannerController::class, 'getHero']);
+    $router->get('/api/banners/{id}', [BannerController::class, 'getById']);
+    $router->post('/api/banners', [BannerController::class, 'create']);
+    $router->put('/api/banners/{id}', [BannerController::class, 'update']);
+    $router->delete('/api/banners/{id}', [BannerController::class, 'delete']);
+    $router->put('/api/banners/sort-order', [BannerController::class, 'updateSortOrder']);
 
     // Admin routes
     $router->get('/api/admin/dashboard', [AdminController::class, 'getDashboard']);
