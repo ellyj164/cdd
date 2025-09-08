@@ -48,6 +48,116 @@ CREATE TABLE `vendors` (
   `taxId` varchar(255) NULL,
   `status` enum('pending','active','suspended','rejected') NOT NULL DEFAULT 'pending',
   `businessAddress` json NULL,
+  `contactInformation` json NULL,
+  `bankingInformation` json NULL,
+  `documents` json NULL,
+  `verificationNotes` text NULL,
+  `commission` decimal(5,2) NOT NULL DEFAULT 10.00,
+  `monthlyFee` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  INDEX `idx_status` (`status`),
+  INDEX `idx_businessName` (`businessName`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =========================================================
+-- PAYMENTS TABLE
+-- =========================================================
+CREATE TABLE `payments` (
+  `id` varchar(36) NOT NULL PRIMARY KEY,
+  `orderId` varchar(36) NOT NULL,
+  `userId` varchar(36) NOT NULL,
+  `amount` decimal(10,2) NOT NULL,
+  `currency` varchar(10) NOT NULL DEFAULT 'USD',
+  `paymentMethod` json NOT NULL,
+  `status` enum('pending','processing','completed','failed','refunded') NOT NULL DEFAULT 'pending',
+  `transactionId` varchar(255) NULL,
+  `gatewayResponse` json NULL,
+  `refundAmount` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `refundReason` text NULL,
+  `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  INDEX `idx_orderId` (`orderId`),
+  INDEX `idx_userId` (`userId`),
+  INDEX `idx_status` (`status`),
+  INDEX `idx_transactionId` (`transactionId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =========================================================
+-- SUPPORT TICKETS TABLE
+-- =========================================================
+CREATE TABLE `support_tickets` (
+  `id` varchar(20) NOT NULL PRIMARY KEY,
+  `userId` varchar(36) NOT NULL,
+  `subject` varchar(255) NOT NULL,
+  `message` text NOT NULL,
+  `category` enum('general','order','payment','product','technical') NOT NULL DEFAULT 'general',
+  `priority` enum('low','medium','high','urgent') NOT NULL DEFAULT 'medium',
+  `status` enum('open','waiting_staff','waiting_customer','resolved','closed') NOT NULL DEFAULT 'open',
+  `assignedToId` varchar(36) NULL,
+  `resolution` text NULL,
+  `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  INDEX `idx_userId` (`userId`),
+  INDEX `idx_status` (`status`),
+  INDEX `idx_priority` (`priority`),
+  INDEX `idx_category` (`category`),
+  INDEX `idx_assignedToId` (`assignedToId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =========================================================
+-- SUPPORT MESSAGES TABLE
+-- =========================================================
+CREATE TABLE `support_messages` (
+  `id` varchar(36) NOT NULL PRIMARY KEY,
+  `ticketId` varchar(20) NOT NULL,
+  `userId` varchar(36) NOT NULL,
+  `message` text NOT NULL,
+  `isStaff` tinyint(1) NOT NULL DEFAULT 0,
+  `attachments` json NULL,
+  `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  INDEX `idx_ticketId` (`ticketId`),
+  INDEX `idx_userId` (`userId`),
+  INDEX `idx_createdAt` (`createdAt`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =========================================================
+-- KNOWLEDGE BASE TABLE
+-- =========================================================
+CREATE TABLE `knowledge_base` (
+  `id` varchar(36) NOT NULL PRIMARY KEY,
+  `title` varchar(255) NOT NULL,
+  `excerpt` text NULL,
+  `content` longtext NOT NULL,
+  `category` varchar(100) NOT NULL,
+  `tags` json NULL,
+  `published` tinyint(1) NOT NULL DEFAULT 0,
+  `views` int NOT NULL DEFAULT 0,
+  `authorId` varchar(36) NULL,
+  `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  INDEX `idx_category` (`category`),
+  INDEX `idx_published` (`published`),
+  INDEX `idx_views` (`views`),
+  FULLTEXT `idx_search` (`title`, `content`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =========================================================
+-- FAQ TABLE
+-- =========================================================
+CREATE TABLE `faq` (
+  `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `question` varchar(500) NOT NULL,
+  `answer` text NOT NULL,
+  `category` varchar(100) NOT NULL,
+  `published` tinyint(1) NOT NULL DEFAULT 1,
+  `sortOrder` int NOT NULL DEFAULT 0,
+  `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  INDEX `idx_category` (`category`),
+  INDEX `idx_published` (`published`),
+  INDEX `idx_sortOrder` (`sortOrder`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
   `contactInfo` json NULL,
   `bankingDetails` json NULL,
   `businessDocuments` json NULL,

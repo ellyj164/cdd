@@ -1,11 +1,29 @@
 # Environment variables
 .env
+.env.local
+.env.production
+.env.staging
+
+# Dependencies
+node_modules/
+vendor/
+
+# Production builds
+frontend/.next/
+frontend/out/
+frontend/dist/
 
 # PHP Backend specific
 backend_php/.env
 backend_php/cache/*.cache
 backend_php/uploads/*
 !backend_php/uploads/.gitkeep
+
+# Frontend specific
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
 
 # IDE files
 .vscode/
@@ -32,3 +50,14 @@ backups/
 *.pem
 *.key
 *.crt
+
+# PHP specific
+composer.phar
+.phpunit.result.cache
+
+# Production
+build/
+
+# Misc
+*.tgz
+*.tar.gz

@@ -60,6 +60,12 @@ require_once __DIR__ . '/api/ReviewController.php';
 require_once __DIR__ . '/api/AdminController.php';
 require_once __DIR__ . '/api/HomepageController.php';
 require_once __DIR__ . '/api/BannerController.php';
+require_once __DIR__ . '/api/PaymentController.php';
+require_once __DIR__ . '/api/AnalyticsController.php';
+require_once __DIR__ . '/api/SupportController.php';
+require_once __DIR__ . '/api/AdminController.php';
+require_once __DIR__ . '/api/HomepageController.php';
+require_once __DIR__ . '/api/BannerController.php';
 
 // Initialize rate limiter
 $rateLimiter = new RateLimiter();
@@ -169,6 +175,30 @@ try {
     $router->put('/api/reviews/{id}', [ReviewController::class, 'update']);
     $router->delete('/api/reviews/{id}', [ReviewController::class, 'delete']);
 
+    // Payment routes
+    $router->post('/api/payments/process', [PaymentController::class, 'processPayment']);
+    $router->get('/api/payments/methods', [PaymentController::class, 'getPaymentMethods']);
+    $router->get('/api/payments/crypto/prices', [PaymentController::class, 'getCryptoPrices']);
+    $router->get('/api/payments/history', [PaymentController::class, 'getPaymentHistory']);
+
+    // Analytics routes
+    $router->get('/api/analytics/platform', [AnalyticsController::class, 'getPlatformAnalytics']);
+    $router->get('/api/analytics/vendor', [AnalyticsController::class, 'getVendorAnalytics']);
+    $router->get('/api/analytics/customer', [AnalyticsController::class, 'getCustomerAnalytics']);
+
+    // Support routes
+    $router->post('/api/support/tickets', [SupportController::class, 'createTicket']);
+    $router->get('/api/support/tickets', [SupportController::class, 'getUserTickets']);
+    $router->get('/api/support/tickets/{id}', [SupportController::class, 'getTicket']);
+    $router->post('/api/support/tickets/{id}/messages', [SupportController::class, 'addMessage']);
+    $router->patch('/api/support/tickets/{id}/close', [SupportController::class, 'closeTicket']);
+    $router->get('/api/support/knowledge-base', [SupportController::class, 'getKnowledgeBase']);
+    $router->get('/api/support/knowledge-base/{id}', [SupportController::class, 'getKnowledgeBaseArticle']);
+    $router->get('/api/support/faq', [SupportController::class, 'getFAQ']);
+    
+    // Admin support routes
+    $router->get('/api/admin/support/tickets', [SupportController::class, 'getAllTickets']);
+
     // Homepage routes
     $router->get('/api/homepage', [HomepageController::class, 'getData']);
     $router->get('/api/homepage/performance', [HomepageController::class, 'getPerformanceMetrics']);
@@ -176,6 +206,11 @@ try {
     // Banner routes
     $router->get('/api/banners', [BannerController::class, 'getAll']);
     $router->get('/api/banners/hero', [BannerController::class, 'getHero']);
+    $router->get('/api/banners/{id}', [BannerController::class, 'getById']);
+    $router->post('/api/banners', [BannerController::class, 'create']);
+    $router->put('/api/banners/{id}', [BannerController::class, 'update']);
+    $router->delete('/api/banners/{id}', [BannerController::class, 'delete']);
+    $router->put('/api/banners/sort-order', [BannerController::class, 'updateSortOrder']);
 
     // Admin routes
     $router->get('/api/admin/dashboard', [AdminController::class, 'getDashboard']);
