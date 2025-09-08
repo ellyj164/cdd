@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-// API base configuration - point to Nest.js backend
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001/api';
+// API base configuration - point to PHP backend
+const API_BASE_URL = import.meta.env.VITE_API_URL || '/backend_php/api';
 
 // Create axios instance
 const api = axios.create({
